@@ -1,8 +1,7 @@
 
 (defpackage :protected-bindings
   (:use :cl)
-  (:export #:with-protected-binding
-           #:with-protected-bindings))
+  (:export #:with-protected-bindings*))
 
 (in-package :protected-bindings)
 
@@ -27,7 +26,7 @@ error if finalizers are not supported)."
 
 ;; @This is particularly useful as this is actually annoying to do correctly.
 
-(defmacro with-protected-bindings (bindings &body body)
+(defmacro with-protected-bindings* (bindings &body body)
   "This sets up a protected bindings, a bindings that has some clean-up code
 that will always be run when the binding expires.
 
