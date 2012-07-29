@@ -1,0 +1,40 @@
+
+* Protected-bindings
+
+Protected-bindings is a library for combining the ideas of lexical clean-up via
+=unwind-protect= and dynamic clean-up via finalization.
+
+The main benefit of using this library is saving you the typing of using
+=unwind-protect= and =tg:finalize=.  In order to properly use =unwind-protect=
+and finalization, you must establish this clean-up immediately after the bind in
+order to mitigate the risk of a condition transferring control out of your code
+and missing the clean-up.  This means that you typically shouldn't bind several
+things and then use one =unwind-protect= to clean them all up, even though this
+is a natural inclination.  We provide an interface that will immediately
+institute the clean-up after the bind without the excessive syntactic overhead
+of multiple nested =let= and =unwind-protect= forms.
+
+* Interface
+
+The interface is very simple.  A single macro is defined,
+=with-protected-bindings*=, which provides a =let*= like interface with arbitrary
+extra forms after the value of each binding that specifies how to clean up the
+binding.  This is typically taken as a lexical clean-up, setting up an
+unwind-protect form.  However, if the first form in the clean-up code in the
+symbol =:finalize=, the code is taken to be the body of a finalization function.
+
+I may someday implement a =with-protected-bindings= for parallel bindings, the
+analog of =let=, for symmetry, but this really isn't usually needed.
+
+* Dependencies
+
+Only trivial-garbage.  Any implementation that has finalization support should
+be supported.
+
+* Known issues
+
+None.  Hopefully this is small enough that there aren't any.
+
+* License
+
+BSD
