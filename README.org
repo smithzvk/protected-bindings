@@ -21,7 +21,9 @@ The interface is very simple.  A single macro is defined,
 extra forms after the value of each binding that specifies how to clean up the
 binding.  This is typically taken as a lexical clean-up, setting up an
 unwind-protect form.  However, if the first form in the clean-up code in the
-symbol =:finalize=, the code is taken to be the body of a finalization function.
+symbol =:finalize=, the following result of the immediately following form is
+taken to be a thunk that performs the clean up.  All forms after that thunk are
+again used in the unwind protect clean up.
 
 I may someday implement a =with-protected-bindings= for parallel bindings, the
 analog of =let=, for symmetry, but this really isn't usually needed.
