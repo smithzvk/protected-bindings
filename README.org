@@ -35,7 +35,12 @@ be supported.
 
 * Known issues
 
-None.  Hopefully this is small enough that there aren't any.
+Issues that are found are dealt with in short order, but...
+
+This software is very lightly tested and should be considered relatively
+immature.  If you use it in your project, or are just trying it out and find a
+glaring mistake, I would appreciate you dropping a complaint in the issues
+section or by email.
 
 * License
 
