@@ -17,7 +17,7 @@ the result will be set as a finalization thunk for the object (or produce an
 error if finalizers are not supported)."
   (if (equal (first binding-clean-up) :finalize)
       `(let ((,binding-var ,binding-form))
-         (tg:finalize ,binding-var (progn ,@(rest binding-clean-up)))
+         (tg:finalize ,binding-var ,@(rest binding-clean-up))
          ,@body)
       `(let ((,binding-var ,binding-form))
          (unwind-protect
@@ -37,7 +37,7 @@ and the result will be set as a finalization thunk for the object (or produce an
 error if finalizers are not supported)."
   (if bindings
       `(with-protected-binding ,(first bindings)
-         (with-protected-bindings ,(rest bindings)
+         (with-protected-bindings* ,(rest bindings)
            ,@body))
       `(progn ,@body)))
 
